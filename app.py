@@ -2,8 +2,8 @@ import streamlit as st
 import os
 
 st.set_page_config(
-    page_title="DRIP",
-    page_icon="🧥",
+    page_title="Wemo Check",
+    page_icon="🪞",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -222,8 +222,8 @@ init_db()
 
 # Sidebar
 with st.sidebar:
-    st.markdown("## DRIP")
-    st.markdown("<p style='font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.5; margin-top:-0.5rem; margin-bottom:1.5rem;'>Your wardrobe, styled.</p>", unsafe_allow_html=True)
+    st.markdown("## Wemo Check")
+    st.markdown("<p style='font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.5; margin-top:-0.5rem; margin-bottom:1.5rem;'>Your wardrobe, styled. 🧥</p>", unsafe_allow_html=True)
 
     st.markdown("---")
 
