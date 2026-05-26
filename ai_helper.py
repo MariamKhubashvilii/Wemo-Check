@@ -31,7 +31,7 @@ def analyze_clothing_item(image_path: str, api_key: str) -> dict:
 Return ONLY the JSON, no markdown, no explanation."""
 
     response = client.messages.create(
-     model="claude-sonnet-4-5",
+        model="claude-sonnet-4-5",
         max_tokens=500,
         messages=[
             {
