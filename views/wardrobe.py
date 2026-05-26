@@ -28,6 +28,10 @@ def show():
     # ---- ADD ITEM ----
     with tab_add:
         st.markdown("### Add a new piece")
+        if st.session_state.get("last_saved"):
+            st.success(f"✓ '{st.session_state['last_saved']}' added to your wardrobe!")
+            st.session_state.pop("last_saved")
+
         uploaded = st.file_uploader(
             "Upload photo",
             type=["jpg", "jpeg", "png", "webp"],
@@ -88,7 +92,8 @@ def show():
                             image_path=img_path
                         )
                         st.session_state.pop("ai_label", None)
-                        st.success(f"'{name}' added!")
+                        st.session_state.pop("uploaded_file", None)
+                        st.session_state["last_saved"] = name
                         st.rerun()
 
     # ---- BROWSE ----
@@ -144,9 +149,10 @@ def show():
                         """, unsafe_allow_html=True)
 
                     st.markdown(f"""
-                    <div style='font-size:0.75rem; font-weight:500; margin-top:0.4rem;'>{item['name']}</div>
-                    <div style='font-size:0.65rem; color:var(--warm-gray); letter-spacing:0.06em;
-                         text-transform:uppercase;'>{item['category']}</div>
+                    <div style='font-size:0.82rem; font-weight:600; margin-top:0.4rem;
+                         color:#1C1C1E;'>{item['name']}</div>
+                    <div style='font-size:0.65rem; color:#8C8C8C; letter-spacing:0.06em;
+                         text-transform:uppercase; margin-top:0.1rem;'>{item['category']}</div>
                     """, unsafe_allow_html=True)
 
                     with st.expander("Details / Edit"):
@@ -168,8 +174,11 @@ def show():
                                     update_item(item["id"], e_name, e_cat, e_colors,
                                                 ", ".join(e_seasons), ", ".join(e_occasions),
                                                 e_brand, e_notes)
+                                    st.success("Saved!")
                                     st.rerun()
                             with col_del:
-                                if st.form_submit_button("Delete", type="secondary"):
+                                if st.form_submit_button("Delete"):
                                     delete_item(item["id"])
+                                    if item["image_path"] and os.path.exists(item["image_path"]):
+                                        os.remove(item["image_path"])
                                     st.rerun()
