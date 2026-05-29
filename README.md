@@ -1,4 +1,4 @@
-# DRIP — Your AI Wardrobe Stylist
+# Wemo Check — Your AI Wardrobe Stylist
 
 A local Streamlit app that manages your wardrobe and suggests outfits based on vibes and weather.
 
